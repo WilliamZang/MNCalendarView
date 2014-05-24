@@ -285,7 +285,10 @@
         cell.titleLabel.text = [self.delegate calendarView:self customTextWithDate:date];
       }
       if ([self.delegate respondsToSelector:@selector(calendarView:customBottomTextWithDate:)]) {
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@\n%@", cell.titleLabel.text, [self.delegate calendarView:self customBottomTextWithDate:date]];
+        NSString *customText = [self.delegate calendarView:self customBottomTextWithDate:date];
+        if ([customText length] > 0) {
+          cell.titleLabel.text = [NSString stringWithFormat:@"%@\n%@", cell.titleLabel.text, customText];
+        }
       }
       if ([self.delegate respondsToSelector:@selector(calendarView:customTextColorWithDate:)]) {
         cell.titleLabel.textColor = [self.delegate calendarView:self customTextColorWithDate:date];
